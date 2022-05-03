@@ -85,7 +85,7 @@ if (is.null(adress$city)) {
 
     call_limer(method = "import_group",
                params = list(iSurveyID = survey_id,
-                             sImportData = base64(read_file(system.file("extdata", umfragegruppename, package="oecs")))[1],
+                             sImportData = RCurl::base64(read_file(system.file("extdata", umfragegruppename, package="oecs")))[1],
                              sImportDataType ="lsg"
                ))
   }
