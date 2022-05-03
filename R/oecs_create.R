@@ -73,7 +73,7 @@ if (is.null(adress$city)) {
   umfragedateiname <- paste0("survey_",scales[1],".lss")
 
   survey_id <- call_limer(method = "import_survey",
-                          params = list(sImportData = base64(read_file(system.file("extdata", umfragedateiname, package="oecs")))[1],
+                          params = list(sImportData = RCurl::base64(read_file(system.file("extdata", umfragedateiname, package="oecs")))[1],
                                         sImportDataType ="lss",
                                         sNewSurveyName = survey_name
                           ))
