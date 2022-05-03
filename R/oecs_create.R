@@ -72,7 +72,7 @@ if (is.null(adress$city)) {
 
   umfragedateiname <- paste0("survey_",scales[1],".lss")
 
-  survey_id <- call_limer(method = "import_survey",
+  survey_id <- limer::call_limer(method = "import_survey",
                           params = list(sImportData = RCurl::base64(readr::read_file(system.file("extdata", umfragedateiname, package="oecs")))[1],
                                         sImportDataType ="lss",
                                         sNewSurveyName = survey_name
@@ -83,7 +83,7 @@ if (is.null(adress$city)) {
   for (ii in 1:(length(scales)-1)) {
     umfragegruppename <- paste0("group_",scales[ii+1],".lsg")
 
-    call_limer(method = "import_group",
+    limer::call_limer(method = "import_group",
                params = list(iSurveyID = survey_id,
                              sImportData = RCurl::base64(readr::read_file(system.file("extdata", umfragegruppename, package="oecs")))[1],
                              sImportDataType ="lsg"
@@ -94,17 +94,17 @@ if (is.null(adress$city)) {
 
   # Benutzer anlegen =================
   #Token aktivieren
-  call_limer(method = "activate_tokens",
+  limer::call_limer(method = "activate_tokens",
              params = list(iSurveyID = survey_id
              )
   )
 
   #Hash erzeugen
   salt <- paste0(do.call(paste0, replicate(5, sample(LETTERS, 1, TRUE), FALSE)), sprintf("%04d", sample(9999, 1, TRUE)), sample(LETTERS, 1, TRUE))
-  adress$SHA256 <- sha256(paste0(adress$firstname,adress$name,adress$street,adress$city,salt))
+  adress$SHA256 <- openssl::sha256(paste0(adress$firstname,adress$name,adress$street,adress$city,salt))
 
   # Benurtzer in LimeSurvey anlegen und Token generieren
-  antwortlimer <- call_limer(method = "add_participants",
+  antwortlimer <- limer::call_limer(method = "add_participants",
                                   params = list(iSurveyID = survey_id,
                                                 aParticipantData = data.frame(lastname = as.character(adress$SHA256))
                                   ))
@@ -114,7 +114,7 @@ if (is.null(adress$city)) {
 
   # Umfrage aktivieren
   if(activate == TRUE){
-    call_limer(method = "activate_survey",
+    limer::call_limer(method = "activate_survey",
              params = list(iSurveyID = survey_id
              )
       )
