@@ -18,5 +18,6 @@ Imports:
     openssl,
     openxlsx,
     RCurl,
-    readr
+    readr,
+    stringr
 Remotes: cloudyr/limer

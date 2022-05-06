@@ -2,11 +2,11 @@
 #' Set up an new screening.
 #' @name oecs_evaluate
 #' @param adress dataframe with adresses of the childs
-#' @param survey_id vector with strings, choosing the scales ("sprachstand","umwelt","who")
+#' @param survey_id integer number of survey
 #' @param save boolean saving files
-#' @param path_answers string path and filename of participants
-#' @param path_pending string path and filename of important settings (survey id, salt of hash)
-#' @param path_not_assignable string path and filename of important settings (survey id, salt of hash)
+#' @param path_answers string path and filename of answers
+#' @param path_pending string path and filename of pending
+#' @param path_not_assignable string path and filename of not assignable
 #'
 #' @return List with 3 dataframes (answers, pending, not assignable)
 #' @examples
