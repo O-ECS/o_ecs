@@ -16,7 +16,7 @@
 
 library(readr)
 library(stringr)
-
+library(qrcode)
 
 oecs_letter <- function(adress,survey_url, path_letter="brief/") {
   ## Test Eingangsvariablen   =======================
@@ -45,6 +45,11 @@ if (is.null(adress$token)) {
     stop("survey_url must be defined")
   }
 
+# Pfad für Ablage erstellen
+
+  dir.create(path_letter, showWarnings = FALSE, recursive = TRUE)
+  dir.create(paste0(path_letter,"qr-codes/"), showWarnings = FALSE, recursive = TRUE)
+
 #  Vorlage einlesen
 
   letter_head <- readr::read_file(system.file("extdata", "letter_head.html", package="oecs"))
@@ -58,18 +63,21 @@ brief <- NULL
     brief_inhalt <- stringr::str_replace_all(brief_inhalt,"--STREET--",adress$street[i])
     brief_inhalt <- stringr::str_replace_all(brief_inhalt,"--CITY--",adress$city[i])
     brief_inhalt <- stringr::str_replace_all(brief_inhalt,"--TOKEN--",adress$token[i])
+
+    png(paste0(path_letter,"qr-codes/",adress$token[i],".png"))
+    plot(qrcode::qr_code(paste0(survey_url,adress$token[i])))
+    dev.off()
     brief <- paste0(brief,brief_inhalt)
   }
 
 brief <- paste0(letter_head,brief,letter_end)
-dir.create(path_letter, showWarnings = FALSE, recursive = TRUE)
 readr::write_file(brief,paste0(path_letter,"/index.html"))
 
 logo <- readr::read_file_raw(system.file("extdata", "letter_logo.png", package="oecs"))
-readr::write_file(logo,paste0(path_letter,"/letter_logo.png"))
+readr::write_file(logo,paste0(path_letter,"letter_logo.png"))
 
 printcss <- readr::read_file(system.file("extdata", "letter_print.css", package="oecs"))
-readr::write_file(printcss,paste0(path_letter,"/letter_print.css"))
-print(paste0("Go to the directory ",getwd(),path_letter," and open index.html"))
+readr::write_file(printcss,paste0(path_letter,"letter_print.css"))
+print(paste0("Go to the directory ",getwd(),"/",path_letter," and open index.html"))
   return()
 }

@@ -2,3 +2,4 @@
 
 export(oecs_create)
 export(oecs_evaluate)
+export(oecs_init)

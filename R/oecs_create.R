@@ -2,7 +2,7 @@
 #' Set up an new screening.
 #' @name oecs_create
 #' @param adress dataframe with adresses of the childs
-#' @param scales vector with strings, choosing the scales ("sprachstand","umwelt","who")
+#' @param scales vector with strings, choosing the scales ("sprachstand","umwelt","who","science")
 #' @param activate boolean for activateing the survey
 #' @param save boolean saving files
 #' @param path_participants string path and filename of participants
@@ -20,17 +20,6 @@
 library(openssl)
 library(RCurl)
 library(readr)
-
-
-# Limer API to LimeSurvey from GitHub
-if (!require("limer")) {
-  if (!require("devtools")) {
-    install.packages("devtools")
-    library("devtools")
-  }
-  install_github("O-ECS/limer")
-}
-library(limer)
 
 
 
@@ -59,7 +48,7 @@ if (is.null(adress$city)) {
     stop("scales must be a vector")
   }
   for (i in 1:length(scales)) {
-    if (scales[i] == "sprachstand" || scales[i] == "who" || scales[i] == "umwelt")
+    if (scales[i] == "sprachstand" || scales[i] == "who" || scales[i] == "umwelt" || scales[i] == "science")
     {
       } else {
       stop("scales not correct defined")

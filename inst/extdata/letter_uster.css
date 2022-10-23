@@ -18,9 +18,10 @@ float: none;
 /* Font auf 16px/13pt setzen, Background auf Weiß und Schrift auf Schwarz setzen.*/
 /* Das spart Tinte */
 body {
-  font-size: 13pt;
+  font-size: 20px;
 font-family: Tahoma, Georgia, "Times New Roman", Times, serif;
 line-height: 1.3;
+background: #ffffff;
 color: #000000;
 }
 
@@ -70,84 +71,62 @@ font-size: 100%;
 .kopf{
   position:relative;
   left:0;
-  top:0;
-}
-
-.absender{
-  position:absolute;
-  left:0;
-  top:0;
+  top:-4cm;
 }
 
 .logo{
-  position:absolute;
+  position:relative;
   left:17cm;
-  top:0;
+  top:-0.5cm;
   width:5cm;
 }
 
 .ortdatum{
-  position:absolute;
+  position:relative;
   left:0;
-  top:5cm;
+  top:0;
 }
 
 .adresse{
   position:relative;
   left:0;
-  top:7cm;
-}
-
-.adressfeld{
-  position:absolute;
-  left:0;
   top:0;
 }
 
-
-.brieftext{
-  position:relative;
-  left:0;
-  top:15cm;
-}
-
 .betreff{
-  position:absolute;
+  position:relative;
   left:0;
   top:0;
 }
 
 .anrede{
-  position:absolute;
-  left:0;
-  top:1cm;
-}
-
-.inhalt{
-  position:absolute;
-  left:0;
-  top:2cm;
-}
-
-.gruss{
   position:relative;
-  left:0;
-  top:24cm;
-}
-
-.grusszeilen{
-  position:absolute;
   left:0;
   top:0;
 }
 
-.blackRow {
-margin: 0;
-padding: 0;
-height: 1cm;
-width: 20cm;
-background-color: black;
+.inhalt{
+  position:relative;
+  left:0;
+  top:0;
 }
 
+.grusszeilen{
+  position:relative;
+  left:0;
+  top:0;
+}
+
+   .balkengrau {
+   height: 100px;
+   width: 100px;
+   background-color: #FF0000;
+    }
+
+   .balkenrot {
+   height: 100px;
+   width: 100px;
+   background-color: #FF0000;
+    }
 
 }

@@ -73,7 +73,7 @@ font-size: 100%;
   top:0;
 }
 
-.absender{
+.kopfzeile{
   position:absolute;
   left:0;
   top:0;
@@ -86,7 +86,7 @@ font-size: 100%;
   width:5cm;
 }
 
-.ortdatum{
+.datum{
   position:absolute;
   left:0;
   top:5cm;
@@ -108,7 +108,7 @@ font-size: 100%;
 .brieftext{
   position:relative;
   left:0;
-  top:15cm;
+  top:12cm;
 }
 
 .betreff{

@@ -6,13 +6,13 @@ Authors@R:
            family = "Wyss",
            role = c("aut", "cre"),
            email = "andreas.wyss@socialthink.ch",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           comment = c(ORCID = "0000-0003-2440-3093"))
 Description: O-ECS (Open Early Childhood Screening) is an R package (which using R and LimeSurvey) for a short screening of the need for support before entering kindergarten can be set up and evaluated automatically. Personal data are only stored locally and are not transferred to the LimeSurvey survey software. The instrument is designed for use in German-speaking countries and was developed based on practical requirements.
 License: `use_gpl3_license()`
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 Imports:
     devtools,
     openssl,
