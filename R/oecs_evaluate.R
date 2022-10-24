@@ -20,20 +20,7 @@ library(RCurl)
 library(readr)
 
 
-# Limer API to LimeSurvey from GitHub
-if (!require("limer")) {
-  if (!require("devtools")) {
-    install.packages("devtools")
-    library("devtools")
-  }
-  install_github("O-ECS/limer")
-}
-library(limer)
-
-
-
-
-oecs_evaluate <- function(adress,survey_id,save=T, path_answers="antworten.csv", path_pending="ausstehend.csv", path_not_assignable="nichtzuordenbar.csv") {
+oecs_evaluate <- function(adress,survey_id,save=TRUE, path_answers="antworten.csv", path_pending="ausstehend.csv", path_not_assignable="nichtzuordenbar.csv") {
   ## Test Eingangsvariablen   =======================
   # Test adress
   if (!is.data.frame(adress)) {
@@ -77,6 +64,13 @@ if (is.null(adress$token)) {
   antworten_export$name <- antworten$name
   antworten_export$street <- antworten$street
   antworten_export$city <- antworten$city
+
+  ##  Sprachstand Antworten (ohne Skala)
+  if(dim(as.data.frame(colnames(antworten)) %>% dplyr::filter(colnames(antworten)=="Muttersprache"))[1]==1){
+  antworten_export$Muttersprache <- antworten$Muttersprache
+  antworten_export$sonstigeMuttersprachen <- antworten$Muttersprache.other.
+  antworten_export$SprichtMuttersprache <- antworten$SprichtMuttersprache
+  }
 
     ## Scala Sprachstand
   if (!is.null(antworten$Sprachstand1)&!is.null(antworten$Sprachstand2)&!is.null(antworten$Sprachstand3)&!is.null(antworten$Sprachstand4)){

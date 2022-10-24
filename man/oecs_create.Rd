@@ -6,7 +6,7 @@
 \arguments{
 \item{adress}{dataframe with adresses of the childs}
 
-\item{scales}{vector with strings, choosing the scales ("sprachstand","umwelt","who")}
+\item{scales}{vector with strings, choosing the scales ("sprachstand","umwelt","who","science")}
 
 \item{activate}{boolean for activateing the survey}
 
