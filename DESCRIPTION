@@ -16,6 +16,7 @@ RoxygenNote: 7.2.1
 Imports:
     devtools,
     dplyr,
+    magrittr,
     openssl,
     openxlsx,
     RCurl,

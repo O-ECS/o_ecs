@@ -29,10 +29,12 @@ oecs_evaluate <- function(adress,survey_id,save=TRUE, path_answers="antworten.cs
   if (is.null(adress$firstname)) {
     stop("column firstname is not defined")
   }
-
 if (is.null(adress$name)) {
   stop("column name is not defined")
 }
+  if (is.null(adress$additional)) {
+    stop("column additional is not defined")
+  }
 if (is.null(adress$street)) {
   stop("column street is not defined")
 }
@@ -41,7 +43,12 @@ if (is.null(adress$city)) {
 }
 if (is.null(adress$token)) {
     stop("column token is not defined")
+}
+
+  if (is.null(adress$birthday)) {
+    stop("column birthday is not defined")
   }
+
   # Test survey_id
   if (!is.numeric(survey_id)) {
     stop("survey_id must be a integer")
@@ -62,8 +69,10 @@ if (is.null(adress$token)) {
   antworten_export <- NULL
   antworten_export$firstname <- antworten$firstname
   antworten_export$name <- antworten$name
+  antworten_export$additional <- antworten$additional
   antworten_export$street <- antworten$street
   antworten_export$city <- antworten$city
+  antworten_export$birthday <- antworten$birthday
 
   ##  Sprachstand Antworten (ohne Skala)
   if(dim(as.data.frame(colnames(antworten)) %>% dplyr::filter(colnames(antworten)=="Muttersprache"))[1]==1){
@@ -84,13 +93,15 @@ if (is.null(adress$token)) {
 
   #Ausstehende auslesen =========================
   ausstehend_export <- NULL
-  ausstehend_export <- data.frame(ausstehend$token,
-                      ausstehend$firstname,
+  ausstehend_export <- data.frame(ausstehend$firstname,
                       ausstehend$name,
+                      ausstehend$additional,
                       ausstehend$street,
                       ausstehend$city,
+                      ausstehend$birthday,
+                      ausstehend$token,
                       ausstehend$SHA256)
-  colnames(ausstehend_export) <- c("token","firstname","name","street","city","SHA256")
+  colnames(ausstehend_export) <- c("firstname","name","additional","street","city","birthday","token","SHA256")
 
  ## Speichern ===================
 

@@ -21,9 +21,9 @@ oecs_all <- function(file = "oecs.xlsx"){
     if(steuerung==1){
       #Adressdaten auslesen
       adressdaten <- openxlsx::read.xlsx(wb,"Adressen")
-      adressdaten <- cbind(adressdaten$firstname,adressdaten$name,adressdaten$street,adressdaten$city)
+      adressdaten <- cbind(adressdaten$firstname,adressdaten$name,adressdaten$additional,adressdaten$street,adressdaten$city,adressdaten$birthday)
       adressdaten <- as.data.frame(adressdaten)
-      colnames(adressdaten) <- c("firstname","name","street","city")
+      colnames(adressdaten) <- c("firstname","name","additional","street","city","birthday")
 
 
       #Einstellung auslesen
@@ -60,9 +60,9 @@ oecs_all <- function(file = "oecs.xlsx"){
       oecs::oecs_init(Einstellungen$Werte[7],Einstellungen$Werte[8],Einstellungen$Werte[9])
 
       adressdaten <- openxlsx::read.xlsx(wb,"Adressen")
-      adressdaten <- cbind(adressdaten$firstname,adressdaten$name,adressdaten$street,adressdaten$city,adressdaten$SHA256,adressdaten$token)
+      adressdaten <- cbind(adressdaten$firstname,adressdaten$name,adressdaten$additional,adressdaten$street,adressdaten$city,adressdaten$birthday,adressdaten$SHA256,adressdaten$token)
       adressdaten <- as.data.frame(adressdaten)
-      colnames(adressdaten) <- c("firstname","name","street","city","SHA256","token")
+      colnames(adressdaten) <- c("firstname","name","additional","street","city","birthday","SHA256","token")
 
       responses <- limer::call_limer(method = "get_summary",
                         params = list(iSurveyID =  as.integer(Einstellungen$Werte[10])
@@ -118,7 +118,7 @@ oecs_all <- function(file = "oecs.xlsx"){
     openxlsx::addWorksheet(wb, "Einstellungen")
     openxlsx::writeData(wb,
               "Einstellungen",
-              data.frame(einstellungen=c("Umfragename",
+              data.frame(Einstellungen=c("Umfragename",
                                          "Sprachstandserfassung",
                                          "WHO5",
                                          "Foerderung",
@@ -170,11 +170,18 @@ oecs_all <- function(file = "oecs.xlsx"){
       lockObjects = TRUE,
       lockScenarios = TRUE
     )
+    openxlsx::addWorksheet(wb, "Eckwerte")
+    openxlsx::writeData(wb,
+                        "Eckwerte",
+                        data.frame(Variabeln=c("Alter","Stadt/Region","Organisation","Kontakt Name","Kontakt Telefon","Kontakt Email","Grund der Befragung"),Werte=c("","","","","","",""),Bemerkungen=c("Altersspanne der Kinder","Stadt oder Region zur geografischen Verordnung","Name der befragenden Organisation","Vorname und Name der verantwortlichen Person","Telefonnummer der Kontaktperson","Email-Adresse der Kontaktperson","Hintergründe zur Befragung (z.B. Einschätzung vor Schuleintritt, Freiwilligkeit, ob alle oder nur ausgewählte Personen befragt werden etc.")),
+                        startCol = 1,
+                        startRow = 1,
+    )
 
     openxlsx::addWorksheet(wb, "Adressen")
     openxlsx::writeData(wb,
                         "Adressen",
-                        data.frame(firstname=c("Hans","Max"),name=c("Muster","Frisch"),street=c("Beispielstrasse 5","Dürenmattstrasse 5"),city=c("8057 Zürich","4057 Basel")),
+                        data.frame(firstname=c("Hans","Max"),name=c("Muster","Frisch"),additional=c("",""),street=c("Beispielstrasse 5","Dürenmattstrasse 5"),city=c("8057 Zürich","4057 Basel"),birthday=c("1985-09-14","2009-01-02")),
                         startCol = 1,
                         startRow = 1,
     )

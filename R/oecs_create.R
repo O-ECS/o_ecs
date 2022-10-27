@@ -36,12 +36,18 @@ oecs_create <- function(adress,scales,activate = TRUE, save = TRUE, path_partici
 if (is.null(adress$name)) {
   stop("column name is not defined")
 }
+  if (is.null(adress$additional)) {
+    stop("column additional is not defined")
+  }
 if (is.null(adress$street)) {
   stop("column street is not defined")
 }
 if (is.null(adress$city)) {
   stop("column city is not defined")
 }
+  if (is.null(adress$birthday)) {
+    stop("column birthday is not defined")
+  }
 
   # Test scales
   if (!is.vector(scales)) {
